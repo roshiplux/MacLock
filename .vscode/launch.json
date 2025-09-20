@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:app lock - MacOS}",
+            "name": "Debug AppLock",
+            "program": "${workspaceFolder:app lock - MacOS}/.build/debug/AppLock",
+            "preLaunchTask": "swift: Build Debug AppLock"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:app lock - MacOS}",
+            "name": "Release AppLock",
+            "program": "${workspaceFolder:app lock - MacOS}/.build/release/AppLock",
+            "preLaunchTask": "swift: Build Release AppLock"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:app lock - MacOS}",
+            "name": "Debug MacLock",
+            "program": "${workspaceFolder:app lock - MacOS}/.build/debug/MacLock",
+            "preLaunchTask": "swift: Build Debug MacLock"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:app lock - MacOS}",
+            "name": "Release MacLock",
+            "program": "${workspaceFolder:app lock - MacOS}/.build/release/MacLock",
+            "preLaunchTask": "swift: Build Release MacLock"
+        }
+    ]
+}

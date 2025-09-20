@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build AppLock",
+			"type": "shell",
+			"command": "swift build",
+			"problemMatcher": [
+				"$swiftc"
+			],
+			"group": "build"
+		}
+	]
+}
