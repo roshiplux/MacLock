@@ -26,6 +26,18 @@ mkdir -p "${DIST_DIR}/${APP_BUNDLE}/Contents/Resources"
 # Copy executable
 cp "${BUILD_DIR}/${APP_NAME}" "${DIST_DIR}/${APP_BUNDLE}/Contents/MacOS/"
 
+# Copy icons
+if [ -f "Resources/AppIcon.icns" ]; then
+    cp "Resources/AppIcon.icns" "${DIST_DIR}/${APP_BUNDLE}/Contents/Resources/"
+    cp "Resources/AppIcon.icns" "${DIST_DIR}/${APP_BUNDLE}/Contents/Resources/MacLock.icns"
+    cp "Resources/AppIcon.icns" "${DIST_DIR}/${APP_BUNDLE}/Contents/Resources/icon.icns"
+    echo "✅ App icons copied"
+else
+    echo "⚠️ AppIcon.icns not found, generating..."
+    ./scripts/create-all-icons.sh
+    cp "Resources/AppIcon.icns" "${DIST_DIR}/${APP_BUNDLE}/Contents/Resources/"
+fi
+
 # Copy the project Info.plist which has all the correct settings
 cp "Info.plist" "${DIST_DIR}/${APP_BUNDLE}/Contents/"
 
@@ -65,11 +77,18 @@ rm -rf dmg_staging/*
 cp -R "${DIST_DIR}/${APP_BUNDLE}" dmg_staging/
 ln -sf /Applications dmg_staging/
 
-# Create DMG
+# Create DMG with custom icon
 DMG_PATH="${DIST_DIR}/${DMG_NAME}.dmg"
 rm -f "${DMG_PATH}"
 
 hdiutil create -volname "${APP_NAME}" -srcfolder dmg_staging -format UDZO "${DMG_PATH}"
+
+# Set custom DMG icon if available
+if [ -f "Resources/DMGIcon.icns" ]; then
+    echo "🎨 Setting custom DMG icon..."
+    # Use sips to set the icon
+    sips -i "Resources/DMGIcon.icns" "${DMG_PATH}" > /dev/null 2>&1 || echo "⚠️ Could not set DMG icon"
+fi
 
 # Clean up
 rm -rf dmg_staging

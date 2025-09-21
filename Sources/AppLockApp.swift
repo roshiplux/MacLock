@@ -46,7 +46,7 @@ struct AppLockApp: App {
         }
         
         // Menu bar controls - always visible
-        MenuBarExtra("Mac Lock", systemImage: "lock.shield.fill") {
+        MenuBarExtra("Mac Lock", image: "MenuBarIcon") {
             MenuBarView()
                 .environmentObject(appManager)
         }
